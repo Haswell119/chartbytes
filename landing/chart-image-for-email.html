@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chart Image for Email &amp; GitHub READMEs — ChartBytes</title>
+<meta name="description" content="Embed a chart in email, a GitHub README, Notion or Slack with a plain image URL. ChartBytes renders PNG and SVG charts server-side — no JavaScript, no browser, no signup.">
+<link rel="canonical" href="https://chartbytes.meridian-digital.pro/chart-image-for-email.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chart Image for Email &amp; GitHub READMEs — ChartBytes">
+<meta property="og:description" content="Turn a URL into a PNG/SVG chart image for email, GitHub READMEs, Notion, Slack and PDF reports. No JavaScript, no signup.">
+<meta property="og:url" content="https://chartbytes.meridian-digital.pro/chart-image-for-email.html">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I embed a chart in an email?","acceptedAnswer":{"@type":"Answer","text":"Use a chart image URL. Email clients can't run JavaScript, so a charting library won't render. ChartBytes turns a URL like /chart?t=bar&d=12,19,8,24 into a PNG image you embed with a plain img tag — the chart renders in any email client."}},
+{"@type":"Question","name":"How do I add a chart to a GitHub README?","acceptedAnswer":{"@type":"Answer","text":"Put a Markdown image pointing at the chart URL: ![Sales](https://chartbytes.meridian-digital.pro/chart?t=bar&d=12,19,8,24&labels=Q1,Q2,Q3,Q4&title=Sales). GitHub renders it inline. PNG works everywhere; SVG is crisp and small."}},
+{"@type":"Question","name":"Can I generate a chart image without JavaScript?","acceptedAnswer":{"@type":"Answer","text":"Yes. ChartBytes renders charts server-side from a URL, so a plain img tag or Markdown image is all you need — no JavaScript, no browser, no client library."}}
+]}
+</script>
+<style>
+ :root{color-scheme:light}
+ *{box-sizing:border-box}
+ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1f2937;background:#fff;line-height:1.6}
+ header{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:3.5rem 1.5rem 2.5rem;text-align:center}
+ header h1{font-size:2.2rem;margin:0 0 .5rem;letter-spacing:-.02em}
+ header p{font-size:1.15rem;color:#cbd5e1;max-width:640px;margin:0 auto 1.5rem}
+ .cta{display:inline-block;background:#2dd4bf;color:#0f172a;font-weight:600;padding:.8rem 1.6rem;border-radius:8px;text-decoration:none;font-size:1.05rem}
+ .cta.ghost{background:transparent;color:#e2e8f0;border:1px solid #475569;margin-left:.6rem}
+ main{max-width:860px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+ h2{font-size:1.5rem;margin-top:2.5rem}
+ pre{background:#0f172a;color:#e2e8f0;padding:1rem 1.2rem;border-radius:8px;overflow-x:auto;font-size:.9rem}
+ code{background:#f1f5f9;padding:.1rem .35rem;border-radius:4px;font-size:.9em}
+ .muted{color:#64748b}
+ footer{max-width:860px;margin:0 auto;padding:1.5rem;color:#94a3b8;font-size:.85rem;border-top:1px solid #e2e8f0}
+ a{color:#0d9488}
+</style>
+</head>
+<body>
+<header>
+ <h1>A chart image for email, READMEs &amp; more</h1>
+ <p>Email clients, GitHub READMEs, Notion and Slack have no JavaScript runtime — a charting library can't render there. ChartBytes gives you a static image URL that works everywhere an <code>&lt;img&gt;</code> does.</p>
+ <a class="cta" href="https://chartbytes.meridian-digital.pro/api/checkout">Get Pro — $9 once</a>
+ <a class="cta ghost" href="https://chartbytes.meridian-digital.pro/chart?t=pie&d=12,19,8,24&labels=Q1,Q2,Q3,Q4&title=Share">Live demo</a>
+</header>
+<main>
+<h2>In an email</h2>
+<pre>&lt;img src="https://chartbytes.meridian-digital.pro/chart?t=bar&amp;d=12,19,8,24&amp;labels=Q1,Q2,Q3,Q4&amp;title=Sales" alt="Sales chart"&gt;</pre>
+<p>Most email clients block JavaScript but render images. A chart image URL renders the chart in Gmail, Outlook and Apple Mail with no extra setup.</p>
+
+<h2>In a GitHub README</h2>
+<pre>![Sales](https://chartbytes.meridian-digital.pro/chart?t=bar&amp;d=12,19,8,24&amp;labels=Q1,Q2,Q3,Q4&amp;title=Sales)</pre>
+<p>Drop a Markdown image into any README, issue or wiki page and GitHub renders the chart inline — ideal for CI badges-adjacent stats, project dashboards and release notes.</p>
+
+<h2>In Notion &amp; Slack</h2>
+<p>Paste the same URL into a Notion embed block or a Slack message. Both render the image automatically.</p>
+
+<h2>Chart types</h2>
+<p><code>bar</code> · <code>hbar</code> · <code>stacked</code> · <code>pie</code> · <code>donut</code> — as PNG (default) or SVG. Multiple series are supported (grouped or stacked bars).</p>
+
+<h2>FAQ</h2>
+<p><strong>How do I embed a chart in an email?</strong> Use a chart image URL and a plain <code>&lt;img&gt;</code> tag — the chart renders in any email client.</p>
+<p><strong>How do I add a chart to a GitHub README?</strong> A Markdown image pointing at the chart URL renders inline.</p>
+<p><strong>Can I generate a chart image without JavaScript?</strong> Yes — ChartBytes renders server-side from a URL.</p>
+
+<p class="muted">Built by Meridian Digital · <a href="./index.html">ChartBytes home</a> · <a href="./image-charts-alternative.html">Image-Charts alternative</a> · <a href="./quickchart-alternative.html">QuickChart alternative</a></p>
+</main>
+<footer>© 2026 Meridian Digital · ChartBytes is a chart image API for email, READMEs and reports.</footer>
+</body>
+</html>

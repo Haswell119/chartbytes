@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chartbytes.meridian-digital.pro/sitemap.xml

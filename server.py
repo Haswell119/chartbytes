@@ -39,6 +39,9 @@ PRO_MONTHLY_QUOTA = 25000
 DEFAULT_W = 600
 DEFAULT_H = 300
 
+LANDING_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "landing")
+INDEXNOW_KEY = "32dde7100d40b3fe6f533c2bd96e29bb"  # served at /<key>.txt for IndexNow
+
 # --------------------------------------------------------------------------- palette
 LIGHT = {
     "bg": (255, 255, 255), "fg": (45, 55, 72), "grid": (226, 232, 240),
@@ -483,6 +486,16 @@ class Handler(BaseHTTPRequestHandler):
     def _log(self, code):
         print(f"{time.strftime('%H:%M:%S')} {self.command} {self.path} -> {code}", flush=True)
 
+    def _serve_static(self, filename, ctype="text/html; charset=utf-8"):
+        """Serve a file from the landing/ dir; returns False if missing."""
+        try:
+            with open(os.path.join(LANDING_DIR, filename), "rb") as f:
+                body = f.read()
+        except Exception:
+            return False
+        self._send(200, body, ctype)
+        return True
+
     def do_OPTIONS(self):
         self.send_response(204)
         self.send_header("Access-Control-Allow-Origin", "*")
@@ -499,8 +512,21 @@ class Handler(BaseHTTPRequestHandler):
             qs = urllib.parse.parse_qs(parsed.query, keep_blank_values=True)
             if path == "/health":
                 self._json(200, {"ok": True, "service": "chartbytes", "png": HAS_PIL})
-            elif path == "/":
-                self._send(200, INDEX_HTML.encode(), "text/html; charset=utf-8")
+            elif path in ("/", "/index.html"):
+                if not self._serve_static("index.html"):
+                    self._send(200, INDEX_HTML.encode(), "text/html; charset=utf-8")
+            elif path in ("/image-charts-alternative.html", "/quickchart-alternative.html",
+                          "/chart-image-for-email.html"):
+                if not self._serve_static(path.lstrip("/")):
+                    self._json(404, {"error": "not found"})
+            elif path == "/sitemap.xml":
+                if not self._serve_static("sitemap.xml", "application/xml; charset=utf-8"):
+                    self._json(404, {"error": "not found"})
+            elif path == "/robots.txt":
+                if not self._serve_static("robots.txt", "text/plain; charset=utf-8"):
+                    self._json(404, {"error": "not found"})
+            elif path == f"/{INDEXNOW_KEY}.txt":
+                self._send(200, INDEXNOW_KEY.encode(), "text/plain; charset=utf-8")
             elif path == "/__stats__":
                 with _lock:
                     self._json(200, {**_STATS, "quota_this_month": _QUOTA.get(_month(), 0),
