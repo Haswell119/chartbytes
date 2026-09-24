@@ -507,8 +507,12 @@ class Handler(BaseHTTPRequestHandler):
                                      "free_quota": FREE_MONTHLY_QUOTA})
             elif path == "/api/checkout":
                 sess = create_checkout_session(self._base_url())
-                self._send(302, b"", "text/plain")
+                self.send_response(302)
                 self.send_header("Location", sess["url"])
+                self.send_header("Content-Length", "0")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self._log(302)
             elif path == "/api/redeem":
                 sid = qs.get("session_id", [""])[0]
                 key = redeem_session(sid) if sid else None
