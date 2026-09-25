@@ -18,7 +18,7 @@
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"What is a chart image API?","acceptedAnswer":{"@type":"Answer","text":"A chart image API returns a static PNG or SVG image of a chart from a URL. It lets you embed charts in places that can't run JavaScript — email, GitHub READMEs, Notion, Slack and PDF reports — using a plain image tag."}},
 {"@type":"Question","name":"Is ChartBytes free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The free tier gives 500 chart renders per month with no watermark and no account. Pro is a one-time $9 for dark and brand themes, 25,000 renders/month and immutable caching."}},
-{"@type":"Question","name":"What chart types does ChartBytes support?","acceptedAnswer":{"@type":"Answer","text":"Bar, horizontal bar, stacked bar, pie and donut charts, rendered as PNG or SVG."}}
+{"@type":"Question","name":"What chart types does ChartBytes support?","acceptedAnswer":{"@type":"Answer","text":"Bar, horizontal bar, stacked bar, line, area, scatter, pie and donut charts, rendered as PNG or SVG."}}
 ]}
 </script>
 <style>
@@ -66,6 +66,9 @@
 <tr><td><code>bar</code></td><td>vertical bars (grouped when multiple series)</td><td><a href="https://chartbytes.meridian-digital.pro/chart?t=bar&d=12,19,8,24&labels=Q1,Q2,Q3,Q4">→</a></td></tr>
 <tr><td><code>hbar</code></td><td>horizontal bars</td><td><a href="https://chartbytes.meridian-digital.pro/chart?t=hbar&d=12,19,8,24&labels=Q1,Q2,Q3,Q4">→</a></td></tr>
 <tr><td><code>stacked</code></td><td>stacked bars</td><td><a href="https://chartbytes.meridian-digital.pro/chart?t=stacked&d=4,8,6|2,3,4&labels=X,Y,Z">→</a></td></tr>
+<tr><td><code>line</code></td><td>line chart (multi-series supported)</td><td><a href="https://chartbytes.meridian-digital.pro/chart?t=line&d=12,19,8,24&labels=Q1,Q2,Q3,Q4">→</a></td></tr>
+<tr><td><code>area</code></td><td>area chart (filled line)</td><td><a href="https://chartbytes.meridian-digital.pro/chart?t=area&d=12,19,8,24&labels=Q1,Q2,Q3,Q4">→</a></td></tr>
+<tr><td><code>scatter</code></td><td>scatter plot (points only)</td><td><a href="https://chartbytes.meridian-digital.pro/chart?t=scatter&d=12,19,8,24&labels=Q1,Q2,Q3,Q4">→</a></td></tr>
 <tr><td><code>pie</code></td><td>pie chart</td><td><a href="https://chartbytes.meridian-digital.pro/chart?t=pie&d=12,19,8,24&labels=Q1,Q2,Q3,Q4">→</a></td></tr>
 <tr><td><code>donut</code></td><td>donut chart</td><td><a href="https://chartbytes.meridian-digital.pro/chart?t=donut&d=12,19,8,24&labels=Q1,Q2,Q3,Q4">→</a></td></tr>
 </table>

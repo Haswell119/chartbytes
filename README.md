@@ -33,6 +33,9 @@ gives you that URL with zero setup, so a chart renders anywhere an `<img>` does.
 | `bar` | vertical bar chart (grouped when multiple series) |
 | `hbar` | horizontal bar chart |
 | `stacked` | stacked bar chart |
+| `line` | line chart (multi-series supported) |
+| `area` | area chart (filled line) |
+| `scatter` | scatter plot (points only) |
 | `pie` | pie chart |
 | `donut` | donut chart |
 
@@ -58,11 +61,14 @@ curl -X POST https://chartbytes.meridian-digital.pro/chart \
   -d '{"type":"donut","data":[12,19,8,24],"labels":["Q1","Q2","Q3","Q4"],"title":"Revenue"}'
 ```
 
-### Multiple series (grouped / stacked)
+### Multiple series (grouped / stacked / line)
 
 ```
 .../chart?t=bar&d=4,8,6|2,3,4&labels=X,Y,Z      # grouped bars
 .../chart?t=stacked&d=4,8,6|2,3,4&labels=X,Y,Z  # stacked bars
+.../chart?t=line&d=4,8,6|2,3,4&labels=X,Y,Z     # line chart (two series)
+.../chart?t=area&d=4,8,6|2,3,4&labels=X,Y,Z     # area chart
+.../chart?t=scatter&d=4,8,6|2,3,4&labels=X,Y,Z  # scatter plot
 ```
 
 ## Pricing

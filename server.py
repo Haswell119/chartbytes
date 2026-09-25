@@ -233,6 +233,40 @@ def render_svg(spec):
             ly = cy + outer * 0.66 * __import__("math").sin(__import__("math").radians(mid)) + 4
             value_label(lx, ly, f"{labels[i]}")
             a0 = a1
+    elif t in ("line", "area", "scatter"):
+        ncat = len(labels)
+        gap = iw / max(ncat, 1)
+        vals = [v for s in series for v in s]
+        vmax = max(vals + [1e-9])
+        vmin = min(vals + [0.0])
+        rng = (vmax - vmin) or 1.0
+        ybase = pad_t + ih
+        for g in range(0, 6):
+            gy = pad_t + ih - (g / 5.0) * ih
+            parts.append(f'<line x1="{pad_l}" y1="{gy:.1f}" x2="{w-pad_r}" y2="{gy:.1f}" '
+                         f'stroke="{rgb(theme["grid"])}" stroke-width="1"/>')
+            value_label(pad_l - 6, gy + 4, f"{vmin + rng*g/5:.0f}", anchor="end", size=11)
+        for si, s in enumerate(series):
+            color = pal[si % len(pal)]
+            pts = []
+            for i, v in enumerate(s):
+                x = pad_l + i * gap + gap / 2
+                y = ybase - (v - vmin) / rng * ih
+                pts.append((x, y))
+            if t == "area":
+                poly = " ".join(f"{x:.1f},{y:.1f}" for x, y in pts)
+                parts.append(f'<polygon points="{poly} {pts[-1][0]:.1f},{ybase:.1f} '
+                             f'{pts[0][0]:.1f},{ybase:.1f}" fill="{rgb(color)}" '
+                             f'fill-opacity="0.25" stroke="none"/>')
+            if t in ("line", "area"):
+                lp = " ".join(f"{x:.1f},{y:.1f}" for x, y in pts)
+                parts.append(f'<polyline points="{lp}" fill="none" stroke="{rgb(color)}" '
+                             f'stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>')
+            for x, y in pts:
+                parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3.5" fill="{rgb(color)}" '
+                             f'stroke="{rgb(theme["bg"])}" stroke-width="1"/>')
+        for i in range(ncat):
+            value_label(pad_l + i * gap + gap / 2, h - 10, labels[i])
     else:
         ncat = len(labels)
         nser = len(series)
@@ -337,6 +371,34 @@ def render_png(spec):
             ly = cy + outer * 0.66 * math.sin(mid)
             d.text((lx, ly), labels[i], fill=theme["bg"], font=font_s, anchor="mm")
             a0 = a1
+    elif t in ("line", "area", "scatter"):
+        ncat = len(labels)
+        gap = iw / max(ncat, 1)
+        vals = [v for s in series for v in s]
+        vmax = max(vals + [1e-9])
+        vmin = min(vals + [0.0])
+        rng = (vmax - vmin) or 1.0
+        ybase = pad_t + ih
+        for g in range(0, 6):
+            gy = pad_t + ih - (g / 5.0) * ih
+            d.line([(pad_l, gy), (w - pad_r, gy)], fill=theme["grid"], width=1)
+            d.text((pad_l - 6, gy), f"{vmin + rng*g/5:.0f}", fill=theme["fg"], font=font_s, anchor="rm")
+        for si, s in enumerate(series):
+            color = pal[si % len(pal)]
+            pts = []
+            for i, v in enumerate(s):
+                x = pad_l + i * gap + gap / 2
+                y = ybase - (v - vmin) / rng * ih
+                pts.append((x, y))
+            if t == "area":
+                fill = tuple(int(c * 0.75 + bc * 0.25) for c, bc in zip(color, theme["bg"]))
+                d.polygon(pts + [(pts[-1][0], ybase), (pts[0][0], ybase)], fill=fill)
+            if t in ("line", "area"):
+                d.line(pts, fill=color, width=3, joint="curve")
+            for x, y in pts:
+                d.ellipse([x - 3.5, y - 3.5, x + 3.5, y + 3.5], fill=color, outline=theme["bg"], width=1)
+        for i in range(ncat):
+            d.text((pad_l + i * gap + gap / 2, h - 12), labels[i], fill=theme["fg"], font=font_s, anchor="mm")
     else:
         ncat = len(labels)
         nser = len(series)
@@ -410,8 +472,6 @@ def render_chart(qs, body=None):
 
     if ctype not in ("bar", "hbar", "line", "area", "pie", "donut", "stacked", "scatter"):
         raise ValueError(f"unknown chart type: {ctype}")
-    if ctype in ("line", "area", "scatter"):
-        raise ValueError(f"chart type '{ctype}' not yet supported (bar/hbar/stacked/pie/donut only)")
 
     if not series or not all(series):
         raise ValueError("empty data series")
@@ -641,7 +701,7 @@ INDEX_HTML = """<!doctype html>
 <pre>GET /chart?t=bar&d=12,19,8,24&labels=Q1,Q2,Q3,Q4&title=Sales&format=png</pre>
 <p><img src="/chart?t=bar&d=12,19,8,24&labels=Q1,Q2,Q3,Q4&title=Sales" alt="example chart" style="max-width:100%"></p>
 <h2>Chart types</h2>
-<p><code>bar</code> · <code>hbar</code> · <code>stacked</code> · <code>pie</code> · <code>donut</code></p>
+<p><code>bar</code> · <code>hbar</code> · <code>stacked</code> · <code>line</code> · <code>area</code> · <code>scatter</code> · <code>pie</code> · <code>donut</code></p>
 <h2>Params</h2>
 <ul>
 <li><code>t</code> / <code>type</code> — chart type (required)</li>
