@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chart Builder — generate a chart image URL instantly | ChartBytes</title>
+<meta name="description" content="Type your data, pick a chart type, and get a ready-to-paste chart image URL for email, GitHub README, Notion or reports. Free, no signup.">
+<link rel="canonical" href="https://chartbytes.meridian-digital.pro/builder.html">
+<meta property="og:title" content="Chart Builder — ChartBytes">
+<meta property="og:description" content="Generate a chart image URL in seconds. Free, no signup, no watermark.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chartbytes.meridian-digital.pro/builder.html">
+<style>
+  :root{--accent:#2563eb;--ink:#1f2937;--muted:#6b7280;--line:#e2e8f0;--bg:#f8fafc}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:900px;margin:2rem auto;padding:0 1.25rem;color:var(--ink);background:#fff;line-height:1.5}
+  h1{font-size:1.6rem;margin:.2rem 0}
+  .muted{color:var(--muted)}
+  a{color:var(--accent)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.25rem}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .panel{border:1px solid var(--line);border-radius:10px;padding:1.1rem;background:#fff}
+  label{display:block;font-size:.82rem;font-weight:600;margin:0.6rem 0 .25rem}
+  input,select{width:100%;padding:.5rem .6rem;border:1px solid var(--line);border-radius:6px;font-size:.95rem;font-family:inherit}
+  input:focus,select:focus{outline:2px solid #bfdbfe;border-color:var(--accent)}
+  .row{display:flex;gap:.6rem}
+  .row>div{flex:1}
+  .preview{background:var(--bg);border:1px dashed var(--line);border-radius:8px;min-height:220px;display:flex;align-items:center;justify-content:center;padding:1rem;overflow:hidden}
+  .preview img{max-width:100%;height:auto;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .urlbox{width:100%;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.78rem;padding:.5rem .6rem;border:1px solid var(--line);border-radius:6px;background:#f1f5f9;word-break:break-all;margin-top:.4rem}
+  .btns{display:flex;gap:.5rem;margin-top:.6rem;flex-wrap:wrap}
+  button{border:0;border-radius:6px;padding:.5rem .85rem;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--accent);color:#fff}
+  button.ghost{background:#eef2ff;color:var(--accent)}
+  .pro{border:1px solid #fcd34d;background:#fffbeb;border-radius:8px;padding:.6rem .8rem;font-size:.85rem;margin-top:.8rem}
+  .pro a{font-weight:600}
+  .foot{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<h1>Chart builder</h1>
+<p class="muted">Type your data, see the chart, copy the URL. Free — no signup, no watermark.</p>
+
+<div class="grid">
+  <div class="panel">
+    <label for="type">Chart type</label>
+    <select id="type">
+      <option value="bar" selected>Bar</option>
+      <option value="hbar">Horizontal bar</option>
+      <option value="stacked">Stacked bar</option>
+      <option value="pie">Pie</option>
+      <option value="donut">Donut</option>
+    </select>
+
+    <label for="data">Data <span class="muted">(comma-separated; use | for a second series)</span></label>
+    <input id="data" value="12,19,8,24" spellcheck="false">
+
+    <label for="labels">Labels <span class="muted">(optional)</span></label>
+    <input id="labels" value="Q1,Q2,Q3,Q4" spellcheck="false">
+
+    <label for="title">Title <span class="muted">(optional)</span></label>
+    <input id="title" value="Sales" spellcheck="false">
+
+    <div class="row">
+      <div>
+        <label for="w">Width</label>
+        <input id="w" value="600" type="number" min="80" max="2000">
+      </div>
+      <div>
+        <label for="h">Height</label>
+        <input id="h" value="300" type="number" min="80" max="2000">
+      </div>
+      <div>
+        <label for="format">Format</label>
+        <select id="format"><option value="png" selected>PNG</option><option value="svg">SVG</option></select>
+      </div>
+    </div>
+
+    <label for="theme">Theme</label>
+    <select id="theme">
+      <option value="light" selected>Light (free)</option>
+      <option value="dark">Dark (Pro)</option>
+      <option value="brand">Brand (Pro)</option>
+    </select>
+    <div class="pro hidden" id="proHint">Dark and brand themes are <strong>Pro</strong> — a one-time $9. <a href="/api/checkout">Get Pro →</a> (preview shows the free light theme).</div>
+  </div>
+
+  <div class="panel">
+    <label>Preview</label>
+    <div class="preview"><img id="preview" alt="Chart preview"></div>
+    <label>Chart image URL</label>
+    <div class="urlbox" id="url"></div>
+    <div class="btns">
+      <button id="copyUrl">Copy URL</button>
+      <button id="copyMd" class="ghost">Copy Markdown</button>
+      <button id="open" class="ghost">Open in new tab ↗</button>
+    </div>
+    <p class="muted" style="font-size:.8rem">Paste the URL into an <code>&lt;img&gt;</code> tag, a GitHub README, Notion, or an email — it renders live.</p>
+  </div>
+</div>
+
+<div class="foot">
+  <a href="/">← ChartBytes home</a> · Built by Meridian Digital · <a href="https://github.com/Haswell119/chartbytes">Source (MIT)</a>
+</div>
+
+<script>
+(function(){
+  var $ = function(id){return document.getElementById(id);};
+  var els = ['type','data','labels','title','w','h','format','theme'];
+  var t = null;
+
+  function buildUrl(){
+    var q = new URLSearchParams();
+    q.set('t', $('type').value);
+    q.set('d', $('data').value);
+    if($('labels').value.trim()) q.set('labels', $('labels').value.trim());
+    if($('title').value.trim()) q.set('title', $('title').value.trim());
+    q.set('w', $('w').value); q.set('h', $('h').value);
+    q.set('format', $('format').value);
+    var theme = $('theme').value;
+    q.set('theme', theme === 'light' ? 'light' : 'light'); // preview always light (dark/brand are Pro)
+    return window.location.origin + '/chart?' + q.toString();
+  }
+
+  function refresh(){
+    var theme = $('theme').value;
+    $('proHint').classList.toggle('hidden', theme === 'light');
+    var u = buildUrl();
+    $('url').textContent = u;
+    $('preview').src = u;
+  }
+
+  function copy(txt){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt);
+    } else {
+      var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta);
+      ta.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(ta);
+    }
+  }
+
+  $('copyUrl').onclick = function(){ copy($('url').textContent); this.textContent='Copied!'; setTimeout(function(){document.getElementById('copyUrl').textContent='Copy URL';},1200); };
+  $('copyMd').onclick = function(){
+    var u = buildUrl();
+    copy('![' + ($('title').value || 'chart') + '](' + u + ')');
+    this.textContent='Copied!'; setTimeout(function(){document.getElementById('copyMd').textContent='Copy Markdown';},1200);
+  };
+  $('open').onclick = function(){ window.open(buildUrl(), '_blank'); };
+
+  els.forEach(function(id){
+    $(id).addEventListener('input', function(){
+      if(t) clearTimeout(t);
+      t = setTimeout(refresh, 250);
+    });
+  });
+
+  refresh();
+})();
+</script>
+</body>
+</html>
