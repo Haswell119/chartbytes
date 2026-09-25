@@ -4,20 +4,20 @@ Turn a URL into a chart image. PNG or SVG, generated server-side — for **email
 GitHub READMEs, Notion, Slack, PDF reports, and agent output**. No browser, no JS, no
 account: a plain `<img src="...">` or `![chart](...)` is all it takes.
 
-> **Live:** <https://chartbytes.onrender.com> · **Buy Pro:** <https://buy.stripe.com/fZu7sNdbW1HPgNSgOrgUM05>
+> **Live:** <https://chartbytes.meridian-digital.pro> · **Buy Pro:** <https://buy.stripe.com/fZu7sNdbW1HPgNSgOrgUM05>
 
 ## Example
 
 ```
-https://chartbytes.onrender.com/chart?t=bar&d=12,19,8,24&labels=Q1,Q2,Q3,Q4&title=Sales
+https://chartbytes.meridian-digital.pro/chart?t=bar&d=12,19,8,24&labels=Q1,Q2,Q3,Q4&title=Sales
 ```
 
-![example](https://chartbytes.onrender.com/chart?t=bar&d=12,19,8,24&labels=Q1,Q2,Q3,Q4&title=Sales)
+![example](https://chartbytes.meridian-digital.pro/chart?t=bar&d=12,19,8,24&labels=Q1,Q2,Q3,Q4&title=Sales)
 
 In Markdown:
 
 ```markdown
-![Sales](https://chartbytes.onrender.com/chart?t=bar&d=12,19,8,24&labels=Q1,Q2,Q3,Q4&title=Sales)
+![Sales](https://chartbytes.meridian-digital.pro/chart?t=bar&d=12,19,8,24&labels=Q1,Q2,Q3,Q4&title=Sales)
 ```
 
 ## Why a chart *image* API?
@@ -53,7 +53,7 @@ gives you that URL with zero setup, so a chart renders anywhere an `<img>` does.
 ### POST example
 
 ```bash
-curl -X POST https://chartbytes.onrender.com/chart \
+curl -X POST https://chartbytes.meridian-digital.pro/chart \
   -H 'Content-Type: application/json' \
   -d '{"type":"donut","data":[12,19,8,24],"labels":["Q1","Q2","Q3","Q4"],"title":"Revenue"}'
 ```
