@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chart to PNG Image — ChartBytes</title>
+<meta name="description" content="Convert a chart to a PNG image from a URL — no JavaScript, no screenshot, no browser. ChartBytes renders bar, line, pie and more as a PNG you can embed anywhere.">
+<link rel="canonical" href="https://chartbytes.meridian-digital.pro/chart-to-png.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chart to PNG Image">
+<meta property="og:description" content="Turn a chart into a PNG (or SVG) image from a plain URL — for email, READMEs, Notion, Slack and reports.">
+<meta property="og:url" content="https://chartbytes.meridian-digital.pro/chart-to-png.html">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I convert a chart to PNG?", "acceptedAnswer": {"@type": "Answer", "text": "Use a chart image URL. ChartBytes renders the chart server-side and returns a PNG, so a plain img tag or Markdown image is all you need &mdash; no screenshot tool, no browser, no client library."}}, {"@type": "Question", "name": "Can I make a PNG chart without coding?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Open the chart builder, pick a chart type, type your data, and copy the PNG URL &mdash; or just edit the URL parameters directly."}}, {"@type": "Question", "name": "Is the PNG free of watermarks?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The free tier renders clean PNG charts with no watermark and no account required."}}]}
+</script>
+<style>
+ :root{color-scheme:light}
+ *{box-sizing:border-box}
+ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1f2937;background:#fff;line-height:1.6}
+ header{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:3.5rem 1.5rem 2.5rem;text-align:center}
+ header h1{font-size:2.2rem;margin:0 0 .5rem;letter-spacing:-.02em}
+ header p{font-size:1.15rem;color:#cbd5e1;max-width:640px;margin:0 auto 1.5rem}
+ .cta{display:inline-block;background:#2dd4bf;color:#0f172a;font-weight:600;padding:.8rem 1.6rem;border-radius:8px;text-decoration:none;font-size:1.05rem}
+ .cta.ghost{background:transparent;color:#e2e8f0;border:1px solid #475569;margin-left:.6rem}
+ main{max-width:860px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+ h2{font-size:1.5rem;margin-top:2.5rem}
+ pre{background:#0f172a;color:#e2e8f0;padding:1rem 1.2rem;border-radius:8px;overflow-x:auto;font-size:.9rem}
+ code{background:#f1f5f9;padding:.1rem .35rem;border-radius:4px;font-size:.9em}
+ .demo{border:1px solid #e2e8f0;border-radius:10px;padding:1rem;margin:1rem 0;background:#f8fafc}
+ .demo img{max-width:100%;height:auto}
+ .muted{color:#64748b}
+ footer{max-width:860px;margin:0 auto;padding:1.5rem;color:#94a3b8;font-size:.85rem;border-top:1px solid #e2e8f0}
+ a{color:#0d9488}
+</style>
+</head>
+<body>
+<header>
+ <h1>Turn any chart into a PNG image</h1>
+ <p>A charting library draws in a browser, but most places you need a chart &mdash; an email, a PDF report, a <code>README.md</code>, a Notion page, a Slack message &mdash; have no browser. To get a chart there you need an <strong>image</strong>, not a canvas. ChartBytes converts chart data to a PNG image server-side from a single URL.</p>
+ <a class="cta" href="https://chartbytes.meridian-digital.pro/api/checkout">Get Pro &mdash; $9 once</a>
+ <a class="cta ghost" href="https://chartbytes.meridian-digital.pro/builder.html">Try the live builder &rarr;</a>
+</header>
+<main>
+<div class="demo"><img src="https://chartbytes.meridian-digital.pro/chart?t=bar&d=12,19,8,24&labels=Q1,Q2,Q3,Q4&title=Sales" alt="Example bar chart rendered to PNG by ChartBytes"></div>
+<h2>The URL</h2>
+Point an <code>&lt;img&gt;</code> or Markdown image at a chart URL and the PNG renders automatically. <pre>&lt;img src="https://chartbytes.meridian-digital.pro/chart?t=bar&amp;d=12,19,8,24&amp;labels=Q1,Q2,Q3,Q4&amp;title=Sales" alt="Sales chart"&gt;</pre><h2>PNG vs SVG</h2>
+PNG renders identically everywhere and needs no renderer &mdash; the safe default for email and PDF. SVG is crisp, small and scales, but some clients block it; use it for web pages and documentation.<h2>What you can chart</h2>
+Bar, horizontal bar, stacked bar, line, area, scatter, pie and donut &mdash; each as a PNG (or SVG), with labels, titles and multiple series.<h2>Free &mdash; then Pro</h2>
+The free tier gives 500 chart renders a month, no watermark, no account. Pro is a one-time $9 for dark and brand themes, 25,000 renders/month and immutable caching.
+<h2>FAQ</h2>
+<p><strong>How do I convert a chart to PNG?</strong> Use a chart image URL. ChartBytes renders the chart server-side and returns a PNG, so a plain img tag or Markdown image is all you need &mdash; no screenshot tool, no browser, no client library.</p><p><strong>Can I make a PNG chart without coding?</strong> Yes. Open the chart builder, pick a chart type, type your data, and copy the PNG URL &mdash; or just edit the URL parameters directly.</p><p><strong>Is the PNG free of watermarks?</strong> Yes. The free tier renders clean PNG charts with no watermark and no account required.</p>
+<p class="muted">Built by Meridian Digital &middot; <a href="./index.html">ChartBytes home</a> &middot; <a href="./chart-image-api.html">Chart image API</a> &middot; <a href="./chart-generator.html">Chart generator</a> &middot; <a href="./line-chart-generator.html">Line chart generator</a></p>
+</main>
+<footer>&copy; 2026 Meridian Digital &middot; ChartBytes is a chart image API for email, READMEs and reports.<br><a href="https://twelve.tools" target="_blank"><img src="https://twelve.tools/badge1-light.svg" alt="Featured on Twelve Tools" width="148" height="40"></a> &nbsp; <a href="https://thedevtoolsdir.com" rel="dofollow">TheDevToolsDir</a> &middot; <a href="https://indielineup.com" rel="dofollow">IndieLineup</a> &middot; <a href="https://thesaasdir.com" rel="dofollow">TheSaaSDir</a> &middot; <a href="https://themicrosaasdir.com" rel="dofollow">TheMicroSaaSDir</a> &middot; <a href="https://thedevtoolsindex.com" rel="dofollow">TheDevToolsIndex</a> &middot; <a href="https://thedevtoolslist.com" rel="dofollow">TheDevToolsList</a></footer>
+</body>
+</html>

@@ -575,8 +575,7 @@ class Handler(BaseHTTPRequestHandler):
             elif path in ("/", "/index.html"):
                 if not self._serve_static("index.html"):
                     self._send(200, INDEX_HTML.encode(), "text/html; charset=utf-8")
-            elif path in ("/image-charts-alternative.html", "/quickchart-alternative.html",
-                          "/chart-image-for-email.html", "/builder.html"):
+            elif path.endswith(".html"):
                 if not self._serve_static(path.lstrip("/")):
                     self._json(404, {"error": "not found"})
             elif path == "/sitemap.xml":
