@@ -1,0 +1,8 @@
+# mailschema 0.3.2 — first run (Email Address Confirmation)
+
+- **Install & commands.** `npm install mailschema@0.3.2` (npm 11.17.0, Node v26.5.1, added 7 packages). Validated with `npx mailschema@0.3.2 description description.json --contract email-address-confirmation-0.1.json`, contract fetched from `https://mailschema.org/artifacts/map-0.3/contracts/email-address-confirmation-0.1.json` (digest `sha-256:fc9d8a4f…2e282`).
+- **Time to a valid description.** ~4 minutes: fetch the Registry, read `node_modules/mailschema/dist/core.schema.json` plus the published example, write a 26-line description, validate clean on the first pass.
+- **Field I broke and the exact error.** Set `details.purpose` to `"newsletter-signup"`. The CLI printed exactly `/details/purpose: must be "communication-address"` and exited 1. Restoring it to `"communication-address"` made the description validate again.
+- **Slowest step.** Learning the required envelope. The 16 top-level fields (`@context`, `@type`, `@id`, `profile`, `type`, `issuedAt`, `expiresAt`, `inLanguage`, `service`, `recipient`, `subject`, `terms`, `details`, `operations`, `human`) are not listed in the README; I had to open `core.schema.json` and the example to know the full shape.
+- **Doc gap (exact repro).** Subcommand help is missing: `npx mailschema@0.3.2 description --help` (and `contract --help`) prints the same four-command top-level banner instead of description-specific usage. The README documents neither `--help` nor any usage text.
+- **Change I'd make.** Add per-subcommand `--help` (at minimum `description <file> [--contract <file>]` and the two output lines it prints), and add the required envelope fields to the README quick start so a first-time user does not have to open `core.schema.json`.
