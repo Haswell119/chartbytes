@@ -1,0 +1,15 @@
+{
+  "title": "Example: Sample output for the article-digest service",
+  "author": "Jane Doe",
+  "publish_date": "2026-10-01",
+  "summary": "This is a sample delivery showing the shape of the structured digest. Each field is extracted directly from the source article. No facts are invented beyond what the source states.",
+  "key_claims": [
+    "The source states the first key factual claim, reproduced here in condensed form.",
+    "The source states the second key factual claim, reproduced here in condensed form."
+  ],
+  "external_links": [
+    "https://example.com/reference-one",
+    "https://example.com/reference-two"
+  ],
+  "source": "https://example.com/original-article"
+}
