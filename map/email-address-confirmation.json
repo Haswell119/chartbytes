@@ -1,0 +1,45 @@
+{
+  "@context": "https://mailschema.org/contexts/map-0.3.jsonld",
+  "@type": "MailAction",
+  "profile": "https://mailschema.org/profiles/map/0.3",
+  "type": {
+    "id": "https://mailschema.org/types/email-address-confirmation",
+    "version": "0.1",
+    "contractDigest": "sha-256:fc9d8a4fb3f3065f93bd53d1f9238b13df63186588d3f3f44982d5813412e282"
+  },
+  "@id": "urn:uuid:f8a36b1a-0ada-44fd-8ace-b1d5e4803173",
+  "issuedAt": "2026-10-20T22:04:57Z",
+  "expiresAt": "2026-10-21T22:04:57Z",
+  "inLanguage": "en",
+  "service": {
+    "id": "https://chartbytes.meridian-digital.pro",
+    "tenant": "urn:meridian-digital:chartbytes"
+  },
+  "recipient": "hello@meridian-digital.cloud",
+  "subject": {
+    "id": "urn:meridian-digital:chartbytes:req:20261020",
+    "title": "Confirm this address for the ChartBytes weekly digest"
+  },
+  "terms": {
+    "id": "urn:meridian-digital:chartbytes:terms:confirm:20261020",
+    "version": "20261020-r1"
+  },
+  "human": {
+    "url": "https://chartbytes.meridian-digital.pro/confirm/20261020"
+  },
+  "details": {
+    "mailbox": "hello@meridian-digital.cloud",
+    "requestId": "urn:meridian-digital:chartbytes:req:20261020",
+    "requestedAt": "2026-10-20T22:03:57Z",
+    "purpose": "communication-address",
+    "serviceName": "ChartBytes"
+  },
+  "operations": [
+    {
+      "id": "confirm",
+      "capability": {
+        "url": "https://chartbytes.meridian-digital.pro/c/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ]
+}
